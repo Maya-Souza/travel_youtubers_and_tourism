@@ -1,0 +1,4 @@
+pandas==1.5.2
+python-dotenv==0.21.0
+SQLAlchemy==1.4.44
+mysql-connector-python
