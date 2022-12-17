@@ -11,30 +11,32 @@ That's where the inspiration for this project comes from. I'm a heavy YouTube us
 **You might be wondering: 'But YouTube is huge! How can you possibly check this?**  
 The answer is: **I can't**! At least not for the _entirety_ of YouTube videos, of course! That's why I decided to sample some of the most famous travel channels and base my analysis on them.  
 
-## The structure of this analysis was divided into 4 parts:  
+## The structure of this analysis was divided into 3 parts:  
 
-1. **YouTube data**: I selected 10 of the most famous travel YouTube channels (as seen below). I extracted the titles, descriptions, dates the videos were posted and tags of all the videos in each channel by using the official YouTube API.  
+1. **Data extraction**: For the YouTube data I selected 10 of the most famous travel YouTube channels (as seen below). I extracted the titles, descriptions, dates the videos were posted and tags of all the videos in each channel by using the official YouTube API.  
 <img src= "https://user-images.githubusercontent.com/109185207/207507449-c2f1af7c-c373-465a-b80a-8fa04a846a51.png" width="800" height="400">
 
-The selection of these particular channels did introduce some biases into my analysis. All of them are made by English-speaking people, so there is a linguistic-cultural bias, but since I used Natural Language Processing in my analysis and the libraries work better with the English language, this choice had to be made. Besides this, the sample is very small when we think of the "size" of the internet, so it becomes more challeging to find a correlation between only 10 channels and "real-life" impact. Initially, I tried to gather travel videos in general, without limiting to specific channels. However, since I needed to be logged into my YT account to use its API, the videos shown were always the most relevant **to me** and I judged this would be an even bigger bias. 
+The selection of these particular channels did introduce some biases into my analysis. All of them are made by English-speaking people, so there is a linguistic-cultural bias, but since I used Natural Language Processing in my analysis and the libraries work better with the English language, this choice had to be made. Besides this, the sample is very small when we think of the "size" of the internet, so it becomes more challeging to find a correlation between only 10 channels and "real-life" impact. Initially, I tried to gather travel videos in general, without limiting the analysis to specific channels. However, since I needed to be logged into my YT account to use its API, the videos shown were always the most relevant **to me** and I judged this would be an even bigger bias.  
 
+For the tourism data I used The World Bank [website](https://data.worldbank.org/indicator/ST.INT.ARVL) to find information on international tourist arrivals per year per country and also hotel occupancy rates. I used this to compare it with the most viewed places in a certain year. The database wasn't complete for all the places I was analysing, so I completed it myself by googling the missing information.  
 
 2. **Location extraction**: I needed to find a way to identify the places mentioned in each video. Since the API doesn't give me access to closed captions/subtitles, I decided to extract the location from the titles, descriptions and tags by using Entity Recognition through the LocationTagger pyhton library. This technique presented some challenges because it wasn't 100% precise in recognizing places for my purposes (for example, if in the text input the words 'four' or 'samsung' were present, it assumed they were refering to cities). Also, not all the videos actually mention the place in writing, so, inevitably, I had some missing information.  
 
 3. **Google Trends**: My first measure to check for correlation was analysing Google Trends interest over time results for the most "viewed" places (in terms of total number of views of all the videos mentioning the place) in a given year. The results were checked for searches such as "Place Name" and "Place Name Travel". To access this data I used an unofficial API called PyTrends.  
-
-4. **Real-life data: tourism**: The World Bank provides data on international tourist arrivals per year per country and also hotel occupancy rates. I used this information to compare it with the most viewed places in a certain year. The database wasn't complete for all the places I was analysing, so I completed it myself by googling the missing information.  
 
 ## Step by step process  
 <img src= "https://user-images.githubusercontent.com/109185207/207512278-a5912e24-7c67-44a0-b3a7-cda1a5f7bf18.jpg" width="800" height="350">  
 
 ### 1. Data Extraction  
   
-**YouTube API**  
+**`YouTube API`**  
 
 - The first step after deciding which channels to analyse was getting their IDs in order to use the API. There isn't any way of getting this information out of the channel name or link, so I clicked on a video from each channel, inspected the page and found the ID. The reasons why I didn't scrape the page to gather the IDs automatically were not to get blocked by YouTube for using automation, not having to deal with the different ads before each video (while in the ad the ID wasn't visible on the HTML code) and to make it faster and simpler since there were only 10 channels.  
 
-- Having my list of channel IDs I could use the API to first get information about each channel (subscribers, number of videos, playlist with all the channel videos and total number of views), then using the id for each video playlist I could make another call to get the id for each video and, finally, another call to get all the details from each video. For the functions used in this part of the project I referenced the great work of Thu Vu that can be seen [here](https://www.youtube.com/watch?v=D56_Cx36oGY&t=409s)
+- Having my list of channel IDs I could use the API to first get information about each channel (subscribers, number of videos, playlist with all the channel videos and total number of views), then using the id for each video playlist I could make another call to get the id for each video and, finally, another call to get all the details from each video. For the functions used in this part of the project I referenced the great work of Thu Vu that can be found [here](https://www.youtube.com/watch?v=D56_Cx36oGY&t=409s). This is the dataframe I ended up with:  
+ ![imagen](https://user-images.githubusercontent.com/109185207/208264155-ce026c79-a455-4a56-833b-de4ff97a6e85.png)
+
+- Then, it was a matter of preparing my data for the NLP and further analysis. I built functions to remove emojis from all text inputs, to convert the publication date into datetime so I could extract the year and to convert the count columns to numeric type.
 
 
 
