@@ -33,10 +33,27 @@ For the tourism data I used The World Bank [website](https://data.worldbank.org/
 
 - The first step after deciding which channels to analyse was getting their IDs in order to use the API. There isn't any way of getting this information out of the channel name or link, so I clicked on a video from each channel, inspected the page and found the ID. The reasons why I didn't scrape the page to gather the IDs automatically were not to get blocked by YouTube for using automation, not having to deal with the different ads before each video (while in the ad the ID wasn't visible on the HTML code) and to make it faster and simpler since there were only 10 channels.  
 
-- Having my list of channel IDs I could use the API to first get information about each channel (subscribers, number of videos, playlist with all the channel videos and total number of views), then using the id for each video playlist I could make another call to get the id for each video and, finally, another call to get all the details from each video. For the functions used in this part of the project I referenced the great work of Thu Vu that can be found [here](https://www.youtube.com/watch?v=D56_Cx36oGY&t=409s). This is the dataframe I ended up with:  
- ![imagen](https://user-images.githubusercontent.com/109185207/208264155-ce026c79-a455-4a56-833b-de4ff97a6e85.png)
+- Having my list of channel IDs I could use the API to first get information about each channel (subscribers, number of videos, playlist with all the channel videos and total number of views), then using the id for each video playlist I could make another call to get the id for each video and, finally, another call to get all the details from each video. For the functions used in this part of the project I referenced the great work of Thu Vu that can be found [here](https://www.youtube.com/watch?v=D56_Cx36oGY&t=409s). This is the video_info dataframe (with over 9.500 rows):  
 
-- Then, it was a matter of preparing my data for the NLP and further analysis. I built functions to remove emojis from all text inputs, to convert the publication date into datetime so I could extract the year and to convert the count columns to numeric type.
+ 
+ 
+<img src= "https://user-images.githubusercontent.com/109185207/208264155-ce026c79-a455-4a56-833b-de4ff97a6e85.png" width="950" height="300">
+ 
+
+- Then, it was a matter of preparing my data for the NLP and further analysis. I built functions to remove emojis from all text inputs, to convert the publication date into datetime so I could extract the year and to convert the count columns to numeric type.  
+---  
+
+**`World Bank Open Data`**  
+
+- This part was fairly simple. I downloaded the csv file with information about number of international tourist arrivals and imported it into my notebook. At the end, when I had found out which places were being mentioned and viewed the most, I complemented the missing data myself by using Google. Unfortunately, I wasn't able to find all the missing information.  
+  
+  
+
+<img src= "https://user-images.githubusercontent.com/109185207/208264971-99815042-72db-4160-b8c9-fe3242985c27.png" width="500" height="45">
+  
+
+---
+
 
 
 
