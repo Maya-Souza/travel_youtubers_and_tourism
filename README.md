@@ -58,9 +58,16 @@ Finally, the last piece of data was Google Trends interest over time results. My
 
 **`Google Trends`**  
 
-- 
+---
+
+### 2. Location Extraction  
 
 
+- The library I used is called Location Tagger and the documentation can be found [here](https://github.com/kaushiksoni10/locationtagger). First, I created a function to loop through my video_info dataframe and find names of places in the description, title and tags of each video (in my code this function is called 'extracting_places'). The library separates the location entities in 'city', 'region', and 'country', so I created a new column for each one of these categories. However, there are many cities and regions that have the same name as countries. This meant that whenever this type of place was mentioned it was repeated in more than one category. This was a problem because in order to check which places were mentioned and viewed the most I had to count the number of ocurrences of each one and having repeated words would make the results incorrect. The solution I found was to create a fourth column 'everywhere' in which I added all the unique ocurrences of all the places extracted by the library. Of course that meant I had no way of knowing if the videos were mentioning a city or a country, and in the end I just assumed it was a country.  
+- The next step was counting how many times each place was mentioned per year. I created the function 'counting_ocurrences_places' that looped through my df and by using a counter along with the most_common method returned the places_by_year df. This is a dataframe that contains a column for year and a list of tuples with the place and the number of times it was mentioned.  
+<img src= "https://user-images.githubusercontent.com/109185207/209612365-f4cbfb47-be84-4da7-824d-9d297900ca19.jpg" width="500" height="45">  
+
+-  
 
 
 
