@@ -69,11 +69,20 @@ Finally, the last piece of data was Google Trends interest over time results. My
 <img src= "https://user-images.githubusercontent.com/109185207/209612365-f4cbfb47-be84-4da7-824d-9d297900ca19.jpg" width="1000" height="500">  
 
 -  Analysing the results, I noticed that some things didn't make much sense. For example, why were places such as Tennessee, Nashville and Canada the most mentioned in so many years? What about the place Four? To find these answers I made another function called counting_ocurrences_places_by_channel so I could check channel by channel which ones were 'skewing' my results. Having done that, I found some biased places that had to be removed manually from certain channels and these were:  
-  1.  kara and nate: tennessee and nashville are in every description because it's their address;
-  2.  kristen e siya: their address is in many descriptions from the year 2017 to 2019 and it's grimsby, ontario. They do have videos talking about ontario after this;
-  3.  yes theory: ed, four and thomas are not places;
-  4.  drew binsky: in most of his descriptions from 2021 and 2022 he links some of his most popular videos and one of them is "► Why is Everything Free in Pakistan?"
-  5.  all channels: 'Us' was probably the word 'us' and not 'The U.S'
+  
+  1.  `kara and nate`: tennessee and nashville are in every description because it's their address;  
+  
+  2.  `kristen e siya`: their address is in many descriptions from the year 2017 to 2019 and it's grimsby, ontario. They do have videos talking about ontario after this;  
+  
+  3.  `yes theory`: ed, four and thomas are not places;  
+  
+  4.  `drew binsky`: in most of his descriptions from 2021 and 2022 he links some of his most popular videos and one of them is "► Why is Everything Free in Pakistan?"  
+  
+  5.  `all channels`: 'Us' was probably the word 'us' and not 'The U.S' and nationalities such as "German" and "Canadian" are not places either.  
+    
+    
+  
+  
 
 
 
