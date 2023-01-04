@@ -1,7 +1,7 @@
 # How far does the influence of travel youtubers go? 🌎
 _An analysis of the correlation between travel videos and their impact on people's interest and tourism._  
 
-<img src= "https://user-images.githubusercontent.com/109185207/207506141-777cca65-7f7e-4fb6-b1b7-7dc90f08a968.png" width="800" height="350">
+<img src= "https://user-images.githubusercontent.com/109185207/207506141-777cca65-7f7e-4fb6-b1b7-7dc90f08a968.png" width="800" height="400">
 
 
 **Have you ever been influenced by a video on YouTube to Google a place you had never heard of before? Have you ever visited a new place because of YouTube?**
@@ -24,7 +24,7 @@ Finally, the last piece of data was Google Trends interest over time results. My
 
 2. **Location extraction**: I needed to find a way to identify the places mentioned in each video. Since the API doesn't give me access to closed captions/subtitles, I decided to extract the location from the titles, descriptions and tags by using Entity Recognition through the LocationTagger pyhton library. This technique presented some challenges because it wasn't 100% precise in recognizing places for my purposes (for example, if in the text input the words 'four' or 'samsung' were present, it assumed they were refering to cities). Also, not all the videos actually mention the place in writing, so, inevitably, I had some missing information.  
 
-3. **Conclusions**: Having all the data needed I could finally check if there was any correlation between these travel channels and interest in the places mentioned. Naturally, for this project I can only talk about correlation and not causation because, as I mentioned before, the sample is very small and interest for a certain place is multifactorial, therefore it's impossible to talk about causation in this context.
+3. **Further analysis and conclusions**: Having all the data needed I could finally check if there was any correlation between these travel channels and interest in the places mentioned. Naturally, for this project I can only talk about correlation and not causation because, as I mentioned before, the sample is very small and interest for a certain place is multifactorial, therefore it's impossible to talk about causation in this context.
 
 ## Step by step process  
 <img src= "https://user-images.githubusercontent.com/109185207/207512278-a5912e24-7c67-44a0-b3a7-cda1a5f7bf18.jpg" width="800" height="350">  
@@ -39,7 +39,7 @@ Finally, the last piece of data was Google Trends interest over time results. My
 
  
  
-<img src= "https://user-images.githubusercontent.com/109185207/208264155-ce026c79-a455-4a56-833b-de4ff97a6e85.png" width="950" height="300">
+<img src= "https://user-images.githubusercontent.com/109185207/208264155-ce026c79-a455-4a56-833b-de4ff97a6e85.png" width="700" height="200">
  
 
 - Then, it was a matter of preparing my data for the NLP and further analysis. I built functions to remove emojis from all text inputs, to convert the publication date into datetime so I could extract the year and to convert the count columns to numeric type.  
@@ -68,25 +68,35 @@ Finally, the last piece of data was Google Trends interest over time results. My
 - The next step was counting how many times each place was mentioned per year. I created the function 'counting_ocurrences_places' that looped through my df and by using a counter along with the most_common method returned the places_by_year df. This is a dataframe that contains a column for year and a list of tuples with the place and the number of times it was mentioned.  
 <img src= "https://user-images.githubusercontent.com/109185207/209612365-f4cbfb47-be84-4da7-824d-9d297900ca19.jpg" width="1000" height="500">  
 
--  Analysing the results, I noticed that some things didn't make much sense. For example, why were places such as Tennessee, Nashville and Canada the most mentioned in so many years? What about the place Four? To find these answers I made another function called counting_ocurrences_places_by_channel so I could check channel by channel which ones were 'skewing' my results. Having done that, I found some biased places that had to be removed manually (I built the function deleting_biased_places to do so) from certain channels and these were:  
+-  At first glance, I noticed that some things didn't make much sense. For example, why were places such as Tennessee, Nashville and Canada the most mentioned in so many years? What about the place 'Four'? To find these answers I made another function called counting_ocurrences_places_by_channel so I could check channel by channel which ones were 'skewing' my results. Having done that, I found some biased places that had to deleted, otherwise they could influence my analysis:
   
-  1.  `kara and nate`: tennessee and nashville are in every description because it's their address;  
+  1.  `kara and nate`: Tennessee and Nashville are in every description because it's their address;  
   
-  2.  `kristen e siya`: their address is in many descriptions from the year 2017 to 2019 and it's grimsby, ontario. They do have videos talking about ontario after this;  
+  2.  `kristen e siya`: their address is in many descriptions from the year 2017 to 2019 and it's 'Grimsby, Ontario'. They do have videos talking about Ontario after this;  
   
   3.  `yes theory`: ed, four and thomas are not places;  
   
   4.  `drew binsky`: in most of his descriptions from 2021 and 2022 he links some of his most popular videos and one of them is "► Why is Everything Free in Pakistan?"  
   
   5.  `all channels`: 'Us' was probably the word 'us' and not 'The U.S' and nationalities such as "German" and "Canadian" are not places either.  
-    
-    
+ 
+- To delete them, I built a function called deleting_biased_places to take care of these specific cases I had found by going through their channels and videos. Errors such as the ones listed on item number 5 were not deleted because they could easily spotted once I started to select the places that would the object of my project.
+  
+- **How to decide the criteria for selecting the places to be analysed?**  
+
+I arrived at the conclusion that choosing the most mentioned places wouldn't be the best approach. Since my sample consisted of channels with very different numbers of subscribers, this meant that a place that was mentioned a lot by smaller channels might not have been 'viewed' as much as the ones mentioned by the bigger channels and because the focus of the project is looking for any correlation in "real life" I had to prioritize number of people watching these videos. So, I built a function called get_views_per_top_place that would add up all the views gathered throughout all the videos that were mentioning each place in a certain year (from 2009 to 2022). However, my places_by_year dataframe consisted of lists of tuples, which made it hard to work with, so the next step was creating another function (organizing_places_views_df) to reorganize it and make it more readable once I had the total number of views. This is the final result:  
+
+
+Since the focus of this project were the years 2018 to 2021 only, I could simply check the top 3 most viewed places in each year and conduct my analysis based on them and if there were any errors caused by the LocationTagger library I could move to the next place on the list. On the graphs below, we can see the top 5 places from 2018 to 2021 and how the number of mentions does not necessarily translate into number of views:
+
+<img src= "https://user-images.githubusercontent.com/109185207/210633633-f2246057-9c62-4685-9bda-6ca8d424656c.png" width="500" height="350">     <img src= "https://user-images.githubusercontent.com/109185207/210633884-95245ca3-9275-47d3-8420-2067b4d7ecf7.png" width="500" height="350">  
   
   
 
+<img src= "https://user-images.githubusercontent.com/109185207/210635034-439bbd7d-b444-48e7-bc52-4185088171c5.png" width="500" height="350">      <img src= "https://user-images.githubusercontent.com/109185207/210635045-bcc6c902-e778-4c94-bfc6-bc0b3dbd98c1.png" width="500" height="350">      
 
-
-
+  
+  
 
 
 
