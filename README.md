@@ -89,11 +89,11 @@ I arrived at the conclusion that choosing the most mentioned places wouldn't be 
 
 Since the focus of this project were the years 2018 to 2021 only, I could simply check the top 3 most viewed places in each year and conduct my analysis based on them and if there were any errors caused by the LocationTagger library I could move to the next place on the list. On the graphs below, we can see the top 5 places from 2018 to 2021 and how the number of mentions does not necessarily translate into number of views:
 
-<img src= "https://user-images.githubusercontent.com/109185207/210633633-f2246057-9c62-4685-9bda-6ca8d424656c.png" width="500" height="350">     <img src= "https://user-images.githubusercontent.com/109185207/210633884-95245ca3-9275-47d3-8420-2067b4d7ecf7.png" width="500" height="350">  
+<img src= "https://user-images.githubusercontent.com/109185207/211403331-71059488-99c4-48c8-863b-746ee1860c3e.png" width="500" height="350">     <img src= "https://user-images.githubusercontent.com/109185207/211403397-16984126-ddf7-4556-9864-2e185e3ec956.png" width="500" height="350">  
   
   
 
-<img src= "https://user-images.githubusercontent.com/109185207/210635034-439bbd7d-b444-48e7-bc52-4185088171c5.png" width="500" height="350">      <img src= "https://user-images.githubusercontent.com/109185207/210635045-bcc6c902-e778-4c94-bfc6-bc0b3dbd98c1.png" width="500" height="350">      
+<img src= "https://user-images.githubusercontent.com/109185207/211403500-c98fb7ea-1bd4-44d5-8ae1-13dbf473ae29.png" width="500" height="350">      <img src= "https://user-images.githubusercontent.com/109185207/211403557-6e18afeb-97ca-41d2-8285-701259c76530.png" width="500" height="350">      
 
   
   
