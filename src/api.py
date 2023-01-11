@@ -184,19 +184,24 @@ def get_video_details(youtube, video_ids):
 
 # pytrends API
 
-def getting_google_trends(places_df, year):
+def getting_google_trends(kw_list):
     
-    pytrends = TrendReq(hl='en-US', tz=360)
-    kw_list = []
-    
-    for idx, row in places_df.iterrows():
-        if row['year'] == year:
-            
-            for i in row['views_per_place']:
+    '''
+    Gets results for the keywords in the last 5 years. If more than one keyword is inserted at te same time,
+    the results are for the comparison between the keywords, meaning that the scale is adjusted to be proportional 
+    for all the results at the same time.
 
-                kw_list.append(i[0])
+    :params:
+    - kw_list: List of keywords to be searched.
+
+    :returns:
+    - Dataframe of the interest over time for the keyword(s) inserted.
+
+    '''
+    
+    pytrends = TrendReq(hl='en-US', tz=360, requests_args={'verify':False})
                
-            pytrends.build_payload(kw_list, timeframe=f'{year}-1-1 {year}-12-31')
+    pytrends.build_payload(kw_list, timeframe= 'today 5-y')
                 
     return pytrends.interest_over_time()
 
