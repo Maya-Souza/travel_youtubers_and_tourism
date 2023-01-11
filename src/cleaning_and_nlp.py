@@ -80,28 +80,12 @@ def extracting_places(video_df):
         else:
             place_entity_description = locationtagger.find_locations(text = 'none')
 
-#         getting all countries, states and/or cities
-#         places_title.append({'countries': place_entity_title.countries,
-#                         'states': place_entity_title.regions,
-#                         'cities': place_entity_title.cities})
-        
-#         places_tags.append({'countries': place_entity_tags.countries,
-#                         'states': place_entity_tags.regions,
-#                         'cities': place_entity_tags.cities})
-        
-#         places_description.append({'countries': place_entity_description.countries,
-#                         'states': place_entity_description.regions,
-#                         'cities': place_entity_description.cities})
             
         all_countries.append([place_entity_title.countries, place_entity_tags.countries, place_entity_description.countries])
         all_cities.append([place_entity_title.cities, place_entity_tags.cities, place_entity_description.cities])
         all_regions.append([place_entity_title.regions, place_entity_tags.regions, place_entity_description.regions])
         
         print(index)
-        
-#     video_df['places_title'] = places_title
-#     video_df['places_tags'] = places_tags
-#     video_df['places_description'] = places_description
     
     for i in range(len(all_countries)):
         
@@ -119,6 +103,24 @@ def extracting_places(video_df):
 #######################################################
 
 def deleting_biased_places(videos_info, to_delete, query, channel_title, year_):
+    
+    '''
+    Deletes specific places from the videos_info dataframe if they're biased, for example, places that
+    are always in some descriptions because the youtubers write their address in every description.
+    
+    :params:
+    
+    video_df: Dataframe that contains all the info about each video along with the extracted places in each of them.
+    to_delete: List of places to be deleted.
+    query: 1 if all the ocurrences of the place need to be deleted and 2 if they should only be deleted from specific years.
+    channel_title: Name of the channel which has the biased place.
+    year_: The year from which the place should be deleted. If the query = 1 this variable can assume any value.
+    
+    :returns:
+    
+    No returns.
+    
+    '''
     
     if query == 1:
         
@@ -142,25 +144,28 @@ def deleting_biased_places(videos_info, to_delete, query, channel_title, year_):
                     if (i in row['everywhere']):
 
                         row['everywhere'].remove(i)
+        
 
 #######################################################
 
 def counting_ocurrences_places(video_df):
-
-    # I didn't get only the top 3 or 4 places automatically because the entitity recognition library is not very
-    # precise and I needed to select by hand which places are real places and which are a possible mistake from the 
-    # locationtagger library
+    
+    '''
+    Function that counts how many times each place was mentioned by all channels in a given year.
+    
+    :params: 
+    video_df: Dataframe that contains all the info about each video along with the extracted places in each of them.
+    
+    :returns:
+    places_per_year: Dataframe with the columns 'year' an 'top_places' (all the unique ocurrences
+    of cities, regions and countries together).
+    These columns consist of a list of tuples with (place, number of mentions) sorted by year.
+    
+    '''
     
     everywhere = []
-    all_countries = []
-    all_cities = []
-    all_regions = []
     places_per_year = pd.DataFrame()
-
-    cities = []
     everywhere_ = []
-    countries = []
-    regions = []
     year = []
 
     for i in range(video_df['year_published'].min(), video_df['year_published'].max()+1):
@@ -171,32 +176,17 @@ def counting_ocurrences_places(video_df):
 
             if vd["everywhere"].iloc[j]:
                 everywhere += vd["everywhere"].iloc[j] 
-
-            if vd["all_countries"].iloc[j]:
-                all_countries += vd["all_countries"].iloc[j]
-
-            if vd["all_cities"].iloc[j]:
-                all_cities += vd["all_cities"].iloc[j]
-
-            if vd["all_regions"].iloc[j]:
-                all_regions += vd["all_regions"].iloc[j]
         
         year.append(i)
-        countries.append(Counter(all_countries).most_common())
-        cities.append(Counter(all_cities).most_common())
-        regions.append(Counter(all_regions).most_common())
         everywhere_.append(Counter(everywhere).most_common())
         
-        everywhere = []
-        all_countries = []
-        all_cities = []
-        all_regions = []
+        # The Counter.most_common() method returns tuples of (element, count), so in this case
+        # I end up with a list of tuples
         
+        everywhere = []
+  
     places_per_year['year'] = year
-    places_per_year['countries'] = countries
-    places_per_year['cities'] = cities
-    places_per_year['regions'] = regions
-    places_per_year['everywhere'] = everywhere_
+    places_per_year['top_places'] = everywhere_
 
         
     return places_per_year
@@ -270,9 +260,11 @@ def counting_ocurrences_places_by_channel(video_df):
 def organizing_places_per_channel_df(places_per_year_by_channel):
 
     places1 = []
+    places2 = []
     mentions = []
     channel = []
     year = []
+    n_views = []
     aux = pd.DataFrame()
 
     for idx, row in places_per_year_by_channel.iterrows():
@@ -296,7 +288,6 @@ def organizing_places_per_channel_df(places_per_year_by_channel):
     aux['mentions'] = mentions
     aux['total_number_of_views'] = n_views
     aux['year'] = year
-    aux
     
     return aux.sort_values(by = ['total_number_of_views'], ascending=False)
 
@@ -304,11 +295,30 @@ def organizing_places_per_channel_df(places_per_year_by_channel):
 
 def get_views_per_top_place(video_df, places_df):
     
+    '''
+    Function that counts the total number of views from all videos mentioning each one of the places in a given year.
+    
+    :params:
+    
+    videos_df: Dataframe that contains all the info about each video along with the extracted places in each of them.
+    
+    places_df: Dataframe with the columns 'year' and 'top_places' (all the unique ocurrences of cities, regions and 
+    countries together). These columns consist of a list of tuples of place/number of mentions organized by year and sorted 
+    in ascendent order of mentions.
+    
+    :returns:
+    
+    places_df: Modified dataframe with the column 'views_per_place' consisting of a list of tuples with the name of place
+    and the sum of views from all videos mentioning it.
+    
+    '''
+    
     views = 0
     total_views_per_place = []
     total_views_per_place2 = []
-  
+    
     for idx, row in places_df.iterrows():
+
         for place in row['top_places']:
 
             for idx2, row2 in video_df.iterrows():
@@ -316,12 +326,12 @@ def get_views_per_top_place(video_df, places_df):
                 if row2['year_published'] == row['year']:
 
                     if (row2['everywhere'] != None):
-                        if (place[0] in row2['everywhere']):
-                            views += row2['viewCount']
+
+                            if (place[0] in row2['everywhere']):
+                                views += row2['viewCount']
 
             total_views_per_place.append((place[0], views))
             views = 0
-
 
         total_views_per_place2.append(total_views_per_place)
         total_views_per_place = []
@@ -332,33 +342,50 @@ def get_views_per_top_place(video_df, places_df):
 
 #######################################################
 
-def organizing_places_views_df(places_per_year_filtered, year):
+def organizing_places_views_df(places_per_year):
+    
+    '''
+    Function that organizes the places_per_year2 dataframe by un-nesting the lists of tuples.
+    
+    :params:
+    places_per_year: places_per_year2 dataframe consisting of the columns 'year', 'top_places' and 'views_per_place' and 13 rows. 
+    The last two columns have a list of tuples in each.
+    
+    :returns:
+    places_per_year_views dataframe with 4655 rows and 4 columns, these being 'year', 'places', 
+    'mentions' (number of times the places were mentioned) and 'total_number_of_views', sorted by year and total_number_of_views.
+    
+    '''
 
     places1 = []
     mentions = []
     places2 = []
     n_views = []
+    y = []
     aux = pd.DataFrame()
+    
+    for year in range(2009,2023):
 
-    for idx, row in places_per_year_filtered.iterrows():
-        for i in row['top_places']:
-            if row['year'] == year:
+        for idx, row in places_per_year.iterrows():
+            for i in row['top_places']:
+                if row['year'] == year:
 
-                places1.append(i[0])
-                mentions.append(i[1])
+                    places1.append(i[0])
+                    mentions.append(i[1])
+                    y.append(year)
 
-        for j in row['views_per_place']:
-            if row['year'] == year:
+            for j in row['views_per_place']:
+                if row['year'] == year:
 
-                places2.append(j[0])
-                n_views.append(j[1])
+                    places2.append(j[0])
+                    n_views.append(j[1])
                 
-    aux['top_places_'] = places1
+    aux['places'] = places1
     aux['mentions'] = mentions
     aux['total_number_of_views'] = n_views
-    aux['year'] = year
+    aux['year'] = y
     
-    return aux.sort_values(by = ['total_number_of_views'], ascending=False)
+    return aux.sort_values(by = ['year', 'total_number_of_views'], ascending=False).reset_index(drop=True)
 
 #######################################################
 
