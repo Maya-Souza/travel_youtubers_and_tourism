@@ -107,10 +107,33 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
 
 <img src= "https://user-images.githubusercontent.com/109185207/217399355-d1413a99-c3b0-41cb-986a-49580a3ca6d2.png" width="500" height="350">  
 
+**Having this information, the places that will be the subject of this analysis are:  **
 
+- 2018: Thailand, Pakistan and Mexico. Since Bangkok is in Thailand, I decided to be more generalistic.
+- 2019: Thailand, India and Pakistan
+- 2020: Thailand, Tabriz and India
+- 2021: Thailand, California and Arizona. Santa Monica and Los Angeles are in California and America is too broad (a whole continent!). The reason why I decided to take into consideration these two states separately instead of doing the same I did for Thailand-Bangkok is because the USA is way bigger than Thailand and has a very large volume of tourism in these two states independently.
+- 2022: Thailand, India and Mexico.  
+---
+  
+### 3. Further analysis  
+  
+- Now it's time to relate the main pieces of information I have so far: the total number of views for each place and the results of Google Trends. The dataframe I received from PyTrends gave me weekly results for the past 5 years. However, there weren't videos posted for each place every single week in the same period. So, my first attempt for possibly finding any correlation was plotting all this information in the same plot.  
+  
+![thai](https://user-images.githubusercontent.com/109185207/217666337-a11e55a2-86ae-4fae-a207-925dd053eafa.png)
 
-  
-  
+![india](https://user-images.githubusercontent.com/109185207/217666396-17de90a3-5ac5-4010-8c57-e2044ada1c72.png)
+
+![pakistan](https://user-images.githubusercontent.com/109185207/217666458-24d0c5a6-a27f-47b1-abe8-20c3637f1775.png)
+
+![mexico](https://user-images.githubusercontent.com/109185207/217666489-aeb2fa7e-ac35-4eca-b93d-5e543934c656.png)
+
+![Tabriz](https://user-images.githubusercontent.com/109185207/217666555-3f1351df-ecaf-47a5-840b-1fba49b2961b.png)
+
+![california](https://user-images.githubusercontent.com/109185207/217666601-5c782a99-f2ae-438b-8fae-7ae402787685.png)
+
+![arizona](https://user-images.githubusercontent.com/109185207/217666606-07b32191-6740-49e2-a421-0cd3573fbd3f.png)
+
 
 
 
