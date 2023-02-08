@@ -22,7 +22,7 @@ The selection of these particular channels did introduce some biases into my ana
 
 For the tourism data I used The World Bank [website](https://data.worldbank.org/indicator/ST.INT.ARVL) to find information on international tourist arrivals per year per country and also hotel occupancy rates. I used this to compare it with the most viewed places in a certain year. The database wasn't complete for all the places I was analysing, so I completed it myself by googling the missing information. 
 
-Finally, the last piece of data was Google Trends interest over time results. My first measure to check for correlation was analysing the results for the most "viewed" places (in terms of total number of views of all the videos mentioning the place) in a given year. The results were checked for the searches "Place", "Flight Place" and "Travel Place". To access this data I used an unofficial API called PyTrends.
+Finally, the last piece of data was Google Trends interest over time results. Google Trends is a tool that shows us the behavior of people searching on Google for a specific term. It gives us graphs varying from 0 to 100 showing how much people looked for a given word or phrase over a period of time. My first measure to check for correlation was analysing the results for the most "viewed" places (in terms of total number of views of all the videos mentioning the place) in a given year. The results were checked for the searches "Place", "Flight Place" and "Travel Place". To access this data I used an unofficial API called PyTrends.
 
 2. **Location extraction**: I needed to find a way to identify the places mentioned in each video. Since the API doesn't give me access to closed captions/subtitles, I decided to extract the location from the titles, descriptions and tags by using Entity Recognition through the LocationTagger pyhton library. This technique presented some challenges because it wasn't 100% precise in recognizing places for my purposes (for example, if in the text input the words 'four' or 'samsung' were present, it assumed they were refering to cities). Also, not all the videos actually mention the place in writing, so, inevitably, I had some missing information.  
 
@@ -107,7 +107,7 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
 
 <img src= "https://user-images.githubusercontent.com/109185207/217399355-d1413a99-c3b0-41cb-986a-49580a3ca6d2.png" width="500" height="350">  
 
-**Having this information, the places that will be the subject of this analysis are:  **
+**Having this information, the places that will be the subject of this analysis are:**  
 
 - 2018: Thailand, Pakistan and Mexico. Since Bangkok is in Thailand, I decided to be more generalistic.
 - 2019: Thailand, India and Pakistan
