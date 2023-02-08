@@ -20,7 +20,7 @@ The selection of these particular channels did introduce some biases into my ana
 
 For the tourism data I used The World Bank [website](https://data.worldbank.org/indicator/ST.INT.ARVL) to find information on international tourist arrivals per year per country and also hotel occupancy rates. I used this to compare it with the most viewed places in a certain year. The database wasn't complete for all the places I was analysing, so I completed it myself by googling the missing information. 
 
-Finally, the last piece of data was Google Trends interest over time results. My first measure to check for correlation was analysing the results for the most "viewed" places (in terms of total number of views of all the videos mentioning the place) in a given year. The results were checked for searches such as "Place Name" and "Place Name Travel". To access this data I used an unofficial API called PyTrends.
+Finally, the last piece of data was Google Trends interest over time results. My first measure to check for correlation was analysing the results for the most "viewed" places (in terms of total number of views of all the videos mentioning the place) in a given year. The results were checked for the searches "Place", "Flight Place" and "Travel Place". To access this data I used an unofficial API called PyTrends.
 
 2. **Location extraction**: I needed to find a way to identify the places mentioned in each video. Since the API doesn't give me access to closed captions/subtitles, I decided to extract the location from the titles, descriptions and tags by using Entity Recognition through the LocationTagger pyhton library. This technique presented some challenges because it wasn't 100% precise in recognizing places for my purposes (for example, if in the text input the words 'four' or 'samsung' were present, it assumed they were refering to cities). Also, not all the videos actually mention the place in writing, so, inevitably, I had some missing information.  
 
@@ -58,6 +58,12 @@ Finally, the last piece of data was Google Trends interest over time results. My
 
 **`Google Trends`**  
 
+- Getting all the info through code proved to be a bit tricky. I had to use the unofficial API Pytrends and Google kept blocking my access even with a VPN connected. Sometimes it wouldn't block my access but it would return missing information. So this part was tedious since I had to make one single request for each one of the trends I wanted to check (in total, there were 16) and then if during visualization I noticed values that seemed strange, I would go on Google trends website and verify manually if the values I had were the same. All the searches were made for "World" instead of my location (Spain) so I could get general results. 
+
+- It's important to mention how these trend results work. Google doesn't share the number of searches for the term we enter, instead it normalizes it from 0 to 100 and gives us the tendency of search in this proportion. Another important aspect is that if we make a request with more than one item in the list of phrases to be searched, it actually compares all the items in the scale of 0 to 100. Because of this, I could not make a resquest with the list ['Thailand', 'Flight Thailand', 'Travel Thailand'] for example since the volume of searches for 'Thailand' was so much higher that the values for the last two were 0 in comparison. To tackle this problem, I made one request for 'Place' and a separate one for ['Flight Place, 'Travel Place'] because these last ones were similar in volume.  
+
+- The last detail is that through the API I could either get results for specific ranges of dates, for the period of 1 year or for 5 years. I decided to choose the latter, but this means that all the data is connected and the trends from 0 to 100 are calculated taking into consderation the entire period. This means that in one particular year, say 2020 for example, there might not be a value 100 because the results are not given year by year in this option. 
+
 ---
 
 ### 2. Location Extraction  
@@ -88,14 +94,18 @@ I arrived at the conclusion that choosing the most mentioned places wouldn't be 
 
 After using my function, the places_by_year dataframe consisted of lists of tuples which made it hard to work with, so the next step was creating another function (organizing_places_views_df) to reorganize it and make it more readable once I had the total number of views. This is the final result:  
 
+<img src= "https://user-images.githubusercontent.com/109185207/217399176-7dd7754a-f4e3-4957-b45c-1b7696d00fd3.jpg" width="475" height="250"> 
 
-Since the focus of this project were the years 2018 to 2022 only, I could simply check the top 3 most viewed places in each year and conduct my analysis based on them and if there were any errors caused by the LocationTagger library I could move to the next place on the list. On the graphs below, we can see the top 5 places from 2018 to 2021 and how the number of mentions does not necessarily translate into number of views:
 
-<img src= "https://user-images.githubusercontent.com/109185207/211403331-71059488-99c4-48c8-863b-746ee1860c3e.png" width="500" height="350">     <img src= "https://user-images.githubusercontent.com/109185207/211403397-16984126-ddf7-4556-9864-2e185e3ec956.png" width="500" height="350">  
-  
-  
+Since the focus of this project were the years 2018 to 2022 only, I could simply check the top 3 most viewed places in each year and conduct my analysis based on them and if there were any errors caused by the LocationTagger library I could move to the next place on the list. On the graphs below, we can see the top 5 places from 2018 to 2022 and how the number of mentions does not necessarily translate into number of views:
 
-<img src= "https://user-images.githubusercontent.com/109185207/211403500-c98fb7ea-1bd4-44d5-8ae1-13dbf473ae29.png" width="500" height="350">      <img src= "https://user-images.githubusercontent.com/109185207/211403557-6e18afeb-97ca-41d2-8285-701259c76530.png" width="500" height="350">      
+<img src= "https://user-images.githubusercontent.com/109185207/217399290-bebfb1c1-07a7-4195-a312-57debb3763d9.png" width="500" height="350">     <img src= "https://user-images.githubusercontent.com/109185207/217399316-6626de6c-bfa5-42d4-81a4-be922b079f1d.png" width="500" height="350">  
+
+<img src= "https://user-images.githubusercontent.com/109185207/217399325-0259e076-ba9d-446b-92e0-95d903503119.png" width="500" height="350">      <img src= "https://user-images.githubusercontent.com/109185207/217399352-2680a5b6-f8db-490b-b4e3-da198b32fc17.png" width="500" height="350">  
+
+<img src= "https://user-images.githubusercontent.com/109185207/217399355-d1413a99-c3b0-41cb-986a-49580a3ca6d2.png" width="500" height="350">  
+
+
 
   
   
