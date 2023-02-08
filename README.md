@@ -11,6 +11,8 @@ That's where the inspiration for this project comes from. I'm a heavy YouTube us
 **You might be wondering: 'But YouTube is huge! How can you possibly check this?**  
 The answer is: **I can't**! At least not for the _entirety_ of YouTube videos, of course! That's why I decided to sample some of the most famous travel channels and base my analysis on them.  
 
+⚠️ BE WARNED ⚠️  This is a **very** thorough README in which I'm going to explain **everything** I've done! If you want only the gist, I recommend reading the "structure of this analysis" and the "further analysis and conclusions" sections. If you have any questions or just wish to connect, feel free to send me a message on [LinkedIn](https://www.linkedin.com/in/mayara-almeida-souza/) :) Happy reading!
+
 ## The structure of this analysis was divided into 3 parts:  
 
 1. **Data extraction**: For the YouTube data I selected 10 of the most famous travel YouTube channels (as seen below). I extracted the titles, descriptions, dates the videos were posted and tags of all the videos in each channel by using the official YouTube API.  
