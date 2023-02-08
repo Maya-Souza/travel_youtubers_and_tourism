@@ -121,20 +121,61 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
 - Now it's time to relate the main pieces of information I have so far: the total number of views for each place and the results of Google Trends. So, my first attempt for possibly finding any correlation was plotting all this information in one plot for each place. **All these plots are interactive and better visualized (meaning: less cluttered) on my app deployed on Streamlit.**  
   
 ![thai](https://user-images.githubusercontent.com/109185207/217666337-a11e55a2-86ae-4fae-a207-925dd053eafa.png)
-
+---
 ![india](https://user-images.githubusercontent.com/109185207/217666396-17de90a3-5ac5-4010-8c57-e2044ada1c72.png)
-
+---
 ![pakistan](https://user-images.githubusercontent.com/109185207/217666458-24d0c5a6-a27f-47b1-abe8-20c3637f1775.png)
-
+---
 ![mexico](https://user-images.githubusercontent.com/109185207/217666489-aeb2fa7e-ac35-4eca-b93d-5e543934c656.png)
-
+---
 ![Tabriz](https://user-images.githubusercontent.com/109185207/217666555-3f1351df-ecaf-47a5-840b-1fba49b2961b.png)
-
+---
 ![california](https://user-images.githubusercontent.com/109185207/217666601-5c782a99-f2ae-438b-8fae-7ae402787685.png)
-
+---
 ![arizona](https://user-images.githubusercontent.com/109185207/217666606-07b32191-6740-49e2-a421-0cd3573fbd3f.png)  
   
-- It becomes clear by looking at these graphs that there doesn't seem to be a clear correlation between views and interest over time on Google Trends. However, these plots have too much information on them and it becomes hard to arrive at any conclusion with the "naked eye". The best approach then is using correlation heatmaps, as seen below:   
+- It becomes clear by looking at these graphs that there doesn't seem to be a clear correlation between views and interest over time on Google Trends. However, these plots have too much information on them and it becomes hard to arrive at any conclusion with the "naked eye". The best approach then is using correlation heatmaps, as seen below:  
+  
+  
+  
+   
+  
+  
+  
+![thailand_heatmap](https://user-images.githubusercontent.com/109185207/217673171-8497013f-7584-4f84-9614-0fba047f22de.png)
+
+  
+  
+  
+
+---  
+![pakistan_heatmap](https://user-images.githubusercontent.com/109185207/217673085-2d5fa23e-7b4e-487c-a442-87f4d26bbc3d.png)      ![pakistan_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217673109-fad5ffa1-8ba7-4f1a-9452-fc95935474d1.png)
+
+
+  
+  
+
+---  
+![india_heatmap](https://user-images.githubusercontent.com/109185207/217672909-a7d40e6a-ec7f-4204-88fc-771164cc498a.png)  ![india_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672944-ad28f11f-b9cf-4746-a5e0-8c3190ee3d68.png)
+
+
+  
+  
+
+---  
+![mexico_heatmap](https://user-images.githubusercontent.com/109185207/217672796-1571b6d5-40a3-454f-935b-a75a7d82d5f4.png)  ![mexico_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672820-c59b83bb-4beb-44c8-86ee-364754e50546.png)
+
+  
+  
+---
+![california_heatmap](https://user-images.githubusercontent.com/109185207/217672605-d9df5c71-ecc7-4d15-ab29-d7bb126a6b1b.png) ![california_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672609-56529ece-8e88-4523-b0a8-a3998fe6732f.png)
+  
+  
+  
+---  
+![arizona_heatmap](https://user-images.githubusercontent.com/109185207/217672514-2ebd8f81-ecea-4800-bbb6-67c070cc0dbe.png) ![arizona_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672576-51211ab8-42c0-4d6c-8510-7a30a787c122.png)
+
+
 
 
 
