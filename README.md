@@ -118,7 +118,7 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
   
 ### 3. Further analysis  
   
-- Now it's time to relate the main pieces of information I have so far: the total number of views for each place and the results of Google Trends. The dataframe I received from PyTrends gave me weekly results for the past 5 years. However, there weren't videos posted for each place every single week in the same period. So, my first attempt for possibly finding any correlation was plotting all this information in the same plot.  
+- Now it's time to relate the main pieces of information I have so far: the total number of views for each place and the results of Google Trends. So, my first attempt for possibly finding any correlation was plotting all this information in one plot for each place. **All these plots are interactive and better visualized (meaning: less cluttered) on my app deployed on Streamlit.**  
   
 ![thai](https://user-images.githubusercontent.com/109185207/217666337-a11e55a2-86ae-4fae-a207-925dd053eafa.png)
 
@@ -132,7 +132,9 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
 
 ![california](https://user-images.githubusercontent.com/109185207/217666601-5c782a99-f2ae-438b-8fae-7ae402787685.png)
 
-![arizona](https://user-images.githubusercontent.com/109185207/217666606-07b32191-6740-49e2-a421-0cd3573fbd3f.png)
+![arizona](https://user-images.githubusercontent.com/109185207/217666606-07b32191-6740-49e2-a421-0cd3573fbd3f.png)  
+  
+- It becomes clear by looking at these graphs that there doesn't seem to be a clear correlation between views and interest over time on Google Trends. However, these plots have too much information on them and it becomes hard to arrive at any conclusion with the "naked eye". The best approach then is using correlation heatmaps, as seen below:   
 
 
 
