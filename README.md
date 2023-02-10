@@ -49,7 +49,7 @@ Finally, the last piece of data was Google Trends interest over time results. Go
 
 **`World Bank Open Data`**  
 
-- This part was fairly simple. I downloaded the csv file with information about number of international tourist arrivals and imported it into my notebook. At the end, when I had found out which places were being mentioned and viewed the most, I complemented the missing data myself by using Google. Unfortunately, I wasn't able to find all the missing information. Here's a sample of the dataframe:
+- I downloaded the csv file from the World Bank's website with information about number of international tourist arrivals, but the data was updated only up to 2020. So, when I had found out which places were being mentioned and viewed the most, I complemented it with information I found online. I used sources such as Statista, Reuters, government websites and news outlets. Unfortunately, even after a thorough research, I couldn't gather all the missing data I needed and this part of the analysis is incomplete for the years 2021 and 2022 for some of the places. 
   
   
 
@@ -112,11 +112,14 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
 - 2018: Thailand, Pakistan and Mexico. Since Bangkok is in Thailand, I decided to be more generalistic.
 - 2019: Thailand, India and Pakistan
 - 2020: Thailand, Tabriz and India
-- 2021: Thailand, California and Arizona. Santa Monica and Los Angeles are in California and America is too broad (a whole continent!). The reason why I decided to take into consideration these two states separately instead of doing the same I did for Thailand-Bangkok is because the USA is way bigger than Thailand and has a very large volume of tourism in these two states independently.
+- 2021: Thailand, California and Arizona. Santa Monica and Los Angeles are in California and America is too broad (a whole continent!), so I got the sixth place on the list which was Arizona. The reason why I decided to take into consideration these two states separately instead of doing the same I did for Thailand-Bangkok is because the USA is way bigger than Thailand and has a very large volume of tourism in these two states independently.
 - 2022: Thailand, India and Mexico.  
 ---
   
-### 3. Further analysis  
+### 3. Further analysis and conclusions  
+  
+**3.1 Number of views on Youtube and Google Trends**  
+
   
 - Now it's time to relate the main pieces of information I have so far: the total number of views for each place and the results of Google Trends. So, my first attempt for possibly finding any correlation was plotting all this information in one plot for each place. **All these plots are interactive and better visualized (meaning: less cluttered) on my app deployed on Streamlit.**  
   
@@ -134,7 +137,8 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
 ---
 ![arizona](https://user-images.githubusercontent.com/109185207/217666606-07b32191-6740-49e2-a421-0cd3573fbd3f.png)  
   
-- It becomes clear by looking at these graphs that there doesn't seem to be a clear correlation between views and interest over time on Google Trends. However, these plots have too much information on them and it becomes hard to arrive at any conclusion with the "naked eye". The best approach then is using correlation heatmaps, as seen below:  
+- It becomes clear by looking at these graphs that there doesn't seem to be a clear correlation between views and interest over time on Google Trends. However, these plots have too much information on them and it becomes hard to arrive at any conclusion with the "naked eye". A better approach is calculating the Pearson correlation and using heatmaps to visualize it more clearly. I plotted these heatmaps taking into consideration the whole data I had first (the 5-year period of the trends) and then just taking into consideration the years in which each place was the most viewed on YouTube to check if the correlation coefficient was any different. In order to do this, I created a new dataframe merging the weekly trends with the weeks in which there had been at least one video posted mentioning that place. These weekly views were added among all the videos. In order words, this correlation doesn't take into consideration weeks with zero views (where no videos were posted).
+The results can be seen below:  
   
   
   
@@ -173,7 +177,26 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
   
   
 ---  
-![arizona_heatmap](https://user-images.githubusercontent.com/109185207/217672514-2ebd8f81-ecea-4800-bbb6-67c070cc0dbe.png) ![arizona_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672576-51211ab8-42c0-4d6c-8510-7a30a787c122.png)
+![arizona_heatmap](https://user-images.githubusercontent.com/109185207/217672514-2ebd8f81-ecea-4800-bbb6-67c070cc0dbe.png) ![arizona_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672576-51211ab8-42c0-4d6c-8510-7a30a787c122.png)  
+  
+  
+  
+**`First conclusions:` It seems that the total number of videos mentioning a specific place is not at all correlated with the volume of searches about this place. This was in a certain way expected since the volume of views (meaning: the number of people that watched these videos) is not expressive enough to have an impact on the totality of searches on Google. Besides, despite having the date in which the videos were posted, the data for how many views they had in the week in which they were posted is not available. This is extremely relevant because maybe they went viral weeks or even months after the publication date and the correlation between the trends results from the week they were posted would be close to zero. Ideally, I would need to have access to the sum of weekly views for each video so I could compare the results week by week with more precision.
+Another interesting aspect is that some of the searches seem to have a moderate correlation between themselves. That makes sense because if there's a higher volume of people searching "travel to Thailand" there would be an increase in searches such as "flight to Thailand" as well.**  
+
+
+---  
+
+  
+  
+**3.2 Number of views on YouTube and number of tourists arriving**  
+  
+- The data I gathered gave me the information of arrivals by year, so I had to take into consideration the sum of all yearly views for each place in order to compare the two pieces of information. As mentioned before, for some places I couldn't find data for 2021 and/or 2022, so unfortunately this part of the anlysis has missing information. We can see all the graphs below:
+
+
+  
+   
+
 
 
 
