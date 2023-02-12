@@ -11,7 +11,7 @@ That's where the inspiration for this project comes from. I'm a heavy YouTube us
 **You might be wondering: 'But YouTube is huge! How can you possibly check this?**  
 The answer is: **I can't**! At least not for the _entirety_ of YouTube videos, of course! That's why I decided to sample some of the most famous travel channels and base my analysis on them.  
 
-⚠️ BE WARNED ⚠️  This is a **very** thorough README in which I'm going to explain **everything** I've done! If you want only the gist, I recommend reading the "structure of this analysis" and the "further analysis and conclusions" sections. If you have any questions or just wish to connect, feel free to send me a message on [LinkedIn](https://www.linkedin.com/in/mayara-almeida-souza/) :) Happy reading!
+⚠️ BE WARNED ⚠️  This is a **very** thorough README in which I'm going to explain **everything** I've done! If you want only the gist, I recommend reading the "structure of this analysis", "further analysis and considerations" and the "final conclusions" sections. If you have any questions or just wish to connect, feel free to send me a message on [LinkedIn](https://www.linkedin.com/in/mayara-almeida-souza/) :) Happy reading!
 
 ## The structure of this analysis was divided into 3 parts:  
 
@@ -26,7 +26,9 @@ Finally, the last piece of data was Google Trends interest over time results. Go
 
 2. **Location extraction**: I needed to find a way to identify the places mentioned in each video. Since the API doesn't give me access to closed captions/subtitles, I decided to extract the location from the titles, descriptions and tags by using Entity Recognition through the LocationTagger pyhton library. This technique presented some challenges because it wasn't 100% precise in recognizing places for my purposes (for example, if in the text input the words 'four' or 'samsung' were present, it assumed they were refering to cities). Also, not all the videos actually mention the place in writing, so, inevitably, I had some missing information.  
 
-3. **Further analysis and conclusions**: Having all the data needed I could finally check if there was any correlation between these travel channels and interest in the places mentioned. Naturally, for this project I can only talk about correlation and not causation because, as I mentioned before, the sample is very small and interest for a certain place is multifactorial, therefore it's impossible to talk about causation in this context.
+3. **Further analysis and considerations**: Having all the data needed I could finally check if there was any correlation between these travel channels and interest in the places mentioned. Naturally, for this project I can only talk about correlation and not causation because, as I mentioned before, the sample is very small and interest for a certain place is multifactorial, therefore it's impossible to talk about causation in this context.  
+
+4. **Final conclusions**: Section in which I'll summarize all the insights and try to answer the original question: is there any correlation at all?
 
 ## Step by step process  
 <img src= "https://user-images.githubusercontent.com/109185207/207512278-a5912e24-7c67-44a0-b3a7-cda1a5f7bf18.jpg" width="800" height="350">  
@@ -116,7 +118,7 @@ Since the focus of this project were the years 2018 to 2022 only, I could simply
 - 2022: Thailand, India and Mexico.  
 ---
   
-### 3. Further analysis and conclusions  
+### 3. Further analysis and considerations 
   
 **3.1 Number of views on Youtube and Google Trends**  
 
@@ -147,42 +149,42 @@ The results can be seen below:
   
   
 ![thailand_heatmap](https://user-images.githubusercontent.com/109185207/217673171-8497013f-7584-4f84-9614-0fba047f22de.png)
-
-  
-  
-  
-
----  
-![pakistan_heatmap](https://user-images.githubusercontent.com/109185207/217673085-2d5fa23e-7b4e-487c-a442-87f4d26bbc3d.png)      ![pakistan_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217673109-fad5ffa1-8ba7-4f1a-9452-fc95935474d1.png)
-
-
-  
-  
-
----  
-![india_heatmap](https://user-images.githubusercontent.com/109185207/217672909-a7d40e6a-ec7f-4204-88fc-771164cc498a.png)  ![india_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672944-ad28f11f-b9cf-4746-a5e0-8c3190ee3d68.png)
-
-
-  
-  
-
----  
-![mexico_heatmap](https://user-images.githubusercontent.com/109185207/217672796-1571b6d5-40a3-454f-935b-a75a7d82d5f4.png)  ![mexico_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672820-c59b83bb-4beb-44c8-86ee-364754e50546.png)
-
-  
-  
 ---
+  
+  
+  
+
+  
+![pakistan_heatmap](https://user-images.githubusercontent.com/109185207/217673085-2d5fa23e-7b4e-487c-a442-87f4d26bbc3d.png)      ![pakistan_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217673109-fad5ffa1-8ba7-4f1a-9452-fc95935474d1.png)
+---
+
+  
+  
+
+  
+![india_heatmap](https://user-images.githubusercontent.com/109185207/217672909-a7d40e6a-ec7f-4204-88fc-771164cc498a.png)  ![india_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672944-ad28f11f-b9cf-4746-a5e0-8c3190ee3d68.png)
+---
+
+  
+  
+
+  
+![mexico_heatmap](https://user-images.githubusercontent.com/109185207/217672796-1571b6d5-40a3-454f-935b-a75a7d82d5f4.png)  ![mexico_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672820-c59b83bb-4beb-44c8-86ee-364754e50546.png)
+---
+  
+  
+
 ![california_heatmap](https://user-images.githubusercontent.com/109185207/217672605-d9df5c71-ecc7-4d15-ab29-d7bb126a6b1b.png) ![california_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672609-56529ece-8e88-4523-b0a8-a3998fe6732f.png)
-  
-  
-  
 ---  
+  
+  
+  
 ![arizona_heatmap](https://user-images.githubusercontent.com/109185207/217672514-2ebd8f81-ecea-4800-bbb6-67c070cc0dbe.png) ![arizona_specific_years_heatmap](https://user-images.githubusercontent.com/109185207/217672576-51211ab8-42c0-4d6c-8510-7a30a787c122.png)  
   
   
   
-**`First conclusions:` It seems that the total number of videos mentioning a specific place is not at all correlated with the volume of searches about this place. This was in a certain way expected since the volume of views (meaning: the number of people that watched these videos) is not expressive enough to have an impact on the totality of searches on Google. Besides, despite having the date in which the videos were posted, the data for how many views they had in the week in which they were posted is not available. This is extremely relevant because maybe they went viral weeks or even months after the publication date and the correlation between the trends results from the week they were posted would be close to zero. Ideally, I would need to have access to the sum of weekly views for each video so I could compare the results week by week with more precision.
-Another interesting aspect is that some of the searches seem to have a moderate correlation between themselves. That makes sense because if there's a higher volume of people searching "travel to Thailand" there would be an increase in searches such as "flight to Thailand" as well.**  
+**`First considerations:` It seems that the total number of videos mentioning a specific place is not at all correlated with the volume of searches about this place. This was in a certain way expected since the volume of views (meaning: the number of people that watched these videos) is not expressive enough to have an impact on the totality of searches on Google. Besides, despite having the date in which the videos were posted, the data for how many views they had in the week in which they were posted is not available. This is extremely relevant because maybe they went viral weeks or even months after the publication date and the correlation between the trends results from the week they were posted would be close to zero. Ideally, I would need to have access to the sum of weekly views for each video so I could compare the results week by week with more precision.
+Another interesting aspect is that some of the searches seem to have a moderate correlation between themselves. That makes sense because if there's a higher volume of people searching "travel to Thailand" there could be an increase in searches such as "flight to Thailand" as well.**  
 
 
 ---  
@@ -191,18 +193,68 @@ Another interesting aspect is that some of the searches seem to have a moderate 
   
 **3.2 Number of views on YouTube and number of tourists arriving**  
   
-- The data I gathered gave me the information of arrivals by year, so I had to take into consideration the sum of all yearly views for each place in order to compare the two pieces of information. As mentioned before, for some places I couldn't find data for 2021 and/or 2022, so unfortunately this part of the anlysis has missing information. We can see all the graphs below:
+- The data I gathered gave me the information of arrivals per year, so I had to take into consideration the sum of all yearly YouTube views for each place in order to compare the two pieces of information. As mentioned before, for some places I couldn't find data for 2021 and/or 2022, so unfortunately this part of the analysis has missing information. Below, we can see the plots for tourist arrivals x yearly youtube views and the Pearson correlation coefficient for this two variables in the period of the last 5 years:  
+  
+  
+  
+  
+  
+**Correlation coefficient:**  0.1
+ 
+ ![thai_tourism](https://user-images.githubusercontent.com/109185207/218336923-e3851d1d-2d17-42ac-b150-f5d31546459d.png)
+---
+ 
+ 
+ 
+  **Correlation coefficient:**  0.31
+
+ ![india_tourism](https://user-images.githubusercontent.com/109185207/218336863-c20fccc5-0830-4cb6-bbbc-e29a98ae868e.png)
+---
 
 
   
+ **Correlation coefficient:** -0.51 
+
+![mexico_tourism](https://user-images.githubusercontent.com/109185207/218336963-6d851e9c-e801-414b-a05b-e897ee524040.png)
+---
+
+ 
+
+**Tourism data in this case refers to Iran as a whole and not just Tabriz because this information was not available online. Even taking into consideration the entire country, the data for 2021 and 2022 couldn't be found.**  
+  
+**Correlation coefficient:** For this particular case it made no sense to calculate it because there was a single data point for YouTube views since neither before nor after 2020 any of the YouTube channels analyzed mentioned Tabriz.
+ 
+![tabriz_tourism](https://user-images.githubusercontent.com/109185207/218337093-15bc8060-9a7d-43ac-b987-c59c0fc1a997.png)
+---
+ 
+
+
+ **Correlation coefficient:** Another case in which it would make no sense to calculate it because of the amount of data available.
+  
+![pakistan_tourism](https://user-images.githubusercontent.com/109185207/218337154-736ade16-76fb-40f7-9523-d79285b16e68.png)
+---
+
+  
+ **Correlation coefficient:** 0.2 
+
+![arizona_tourism](https://user-images.githubusercontent.com/109185207/218337221-304b5eb1-8ad2-4624-b890-1907b6e23714.png)
+---
+ 
+ 
+ **Correlation coefficient:** 0.15 
    
+ ![california_tourism](https://user-images.githubusercontent.com/109185207/218337254-c24d16b6-2018-4240-b165-739b6865c1fa.png)
+---
+
+  
 
 
+  
+    
+**`Second considerations:`**  
 
-
-
-
-
-
-
+---  
+  
+  
+### 4. Final conclusions
 
