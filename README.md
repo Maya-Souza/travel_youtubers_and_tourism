@@ -1,4 +1,4 @@
-# How far does the influence of travel youtubers go? 🌎 (STILL BEING EDITED)
+# How far does the influence of travel youtubers go? 🌎
 _An analysis of the correlation between travel videos and their impact on people's interest and tourism._  
 
 <img src= "https://user-images.githubusercontent.com/109185207/207506141-777cca65-7f7e-4fb6-b1b7-7dc90f08a968.png" width="800" height="400">
