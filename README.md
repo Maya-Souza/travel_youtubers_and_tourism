@@ -199,51 +199,58 @@ Another interesting aspect is that some of the searches seem to have a moderate 
   
   
   
-**Correlation coefficient:**  0.1
  
  ![thai_tourism](https://user-images.githubusercontent.com/109185207/218336923-e3851d1d-2d17-42ac-b150-f5d31546459d.png)
+ **Correlation coefficient:**  0.1
+
 ---
  
  
  
-  **Correlation coefficient:**  0.31
 
  ![india_tourism](https://user-images.githubusercontent.com/109185207/218336863-c20fccc5-0830-4cb6-bbbc-e29a98ae868e.png)
+ **Correlation coefficient:**  0.31
+
 ---
 
 
   
- **Correlation coefficient:** -0.51 
 
 ![mexico_tourism](https://user-images.githubusercontent.com/109185207/218336963-6d851e9c-e801-414b-a05b-e897ee524040.png)
+ **Correlation coefficient:** -0.51 
+
 ---
 
  
 
 **Tourism data in this case refers to Iran as a whole and not just Tabriz because this information was not available online. Even taking into consideration the entire country, the data for 2021 and 2022 couldn't be found.**  
   
-**Correlation coefficient:** For this particular case it made no sense to calculate it because there was a single data point for YouTube views since neither before nor after 2020 any of the YouTube channels analyzed mentioned Tabriz.
  
 ![tabriz_tourism](https://user-images.githubusercontent.com/109185207/218337093-15bc8060-9a7d-43ac-b987-c59c0fc1a997.png)
+**Correlation coefficient:** For this particular case it made no sense to calculate it because there was a single data point for YouTube views since neither before nor after 2020 any of the YouTube channels analyzed mentioned Tabriz.
+
 ---
  
 
 
- **Correlation coefficient:** Another case in which it would make no sense to calculate it because of the amount of data available.
   
 ![pakistan_tourism](https://user-images.githubusercontent.com/109185207/218337154-736ade16-76fb-40f7-9523-d79285b16e68.png)
+ **Correlation coefficient:** Another case in which it would make no sense to calculate it because of the amount of data available.
+
 ---
 
   
- **Correlation coefficient:** 0.2 
 
 ![arizona_tourism](https://user-images.githubusercontent.com/109185207/218337221-304b5eb1-8ad2-4624-b890-1907b6e23714.png)
+ **Correlation coefficient:** 0.2 
+
 ---
  
  
- **Correlation coefficient:** 0.15 
    
  ![california_tourism](https://user-images.githubusercontent.com/109185207/218337254-c24d16b6-2018-4240-b165-739b6865c1fa.png)
+ **Correlation coefficient:** 0.15 
+
 ---
 
   
@@ -256,5 +263,19 @@ Another interesting aspect is that some of the searches seem to have a moderate 
 ---  
   
   
-### 4. Final conclusions
+### 4. Final conclusions  
+  
+**1. The analysis shows that there doesn't seem to be any correlation between the YouTube views for the 10 travel channels and people's interest in the places mentioned by said channels according to Google Trends results.** 
+- *What could be different*: on Google Trends I took into consideration the searches made throughout the entire world. If I had access via YouTube to the viewers's countries, I could limit the search to these specific places and have more accurate results. Also, as mentioned before, only having the data for total views on the day of the API request doesn't allow me to find a reliable correlation (or not). I had to compare Trends results for the week the video was posted, but it's possible that for a number of videos the views might not have been high on the week they were posted.  
+  
+**2. Similarly, no correlation between YouTube views and number of tourist arrivals in the places mentioned in the videos was found.** In the case of Mexico, we can see a moderate negative correlation, which would suggest precisely the opposite of what this analysis intended to answer. However, given that the data sample is small, the correlation (negative or positive) can't be proven. The pandemic also played a pivotal role here. Even if one of the YouTubers was creating videos about a specific place that gathered many views, most people in the world couldn't simply go there. 
+- *What could be different*: it could be interesting to explore this correlation since the first year in which the videos were published (2009) and see if anything's different, but the lack of consistency for the tourism data - for some countries it's international arrivals, for others it's arrivals in general - would make it hard to be rigorous. Besides, ideally I would have access to arrivals per month (or week) for every single year along with total views per month (or week). This way, I could check for a delayed correlation, maybe 3, 6 and 9 months (because someone that watches a video about India won't go to India on the same day), and analyse with more accuracy if it would exist or not. I also explored hotel occupancy rate data because it would definitely be interesting to compare it against everything else, but it was heavily incomplete for about half of the places analysed here.  
+
+**3. I believe the great challenge in this project was comparing a sample of around 10 thousand videos, each one gathering at most 50mi views in rare ocasions, against the biggest search engine in the world.** Given this, all the results were expected. There wasn't enough volume of people watching these videos to have an impact on Google Trends or on "real life".
+- *What could be different*: a different strategy could be instead of limiting my sample to 10 travel channels, simply gathering videos that mentioned 'travel', 'trip', 'visit', etc, and repeating the analysis with them. This way, I could have a much larger number of videos (the sky would be the limit!) to analyse. Many other challenges would arise, but maybe the results would show us a different story.
+  
+  
+  
+### Thank you so much for reading and I hope you've enjoyed!   
+
 
