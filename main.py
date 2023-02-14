@@ -104,3 +104,4 @@ pytrends_california_related = api.getting_google_trends(['travel california', 'f
 pytrends_tabriz_related = api.getting_google_trends(['travel tabriz', 'flight tabriz'])
 pytrends_mexico_related = api.getting_google_trends(['travel mexico', 'flight mexico'])
 pytrends_arizona_related = api.getting_google_trends(['travel arizona', 'flight arizona'])
+
