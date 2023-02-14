@@ -195,10 +195,6 @@ def counting_ocurrences_places(video_df):
 
 def counting_ocurrences_places_by_channel(video_df):
 
-    # I didn't get only the top 3 or 4 places automatically because the entitity recognition library is not very
-    # precise and I needed to select by hand which places are real places and which are a possible mistake from the 
-    # locationtagger library
-    
     everywhere = []
     all_countries = []
     all_cities = []
