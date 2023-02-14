@@ -20,32 +20,14 @@ places_mentions_views = pd.read_pickle(r'Projects\Final project\data\all_places_
 
 # Loading previously extracted Google trends data
 
-pytrends_top_places_2018= pd.read_pickle(r'Projects\Final project\data\pytrends_top_places_2018.pkl')
-pytrends_top_places_2019= pd.read_pickle(r'Projects\Final project\data\pytrends_top_places_2019.pkl')
-pytrends_top_places_2020 = pd.read_pickle(r'Projects\Final project\data\pytrends_top_places_2020.pkl')
-pytrends_top_places_2021= pd.read_pickle(r'Projects\Final project\data\pytrends_top_places_2021.pkl')
+pytrends_concat = pd.read_pickle(r'./data/pytrends_concat.pkl')
+pytrends_related_concat = pd.read_pickle(r'./data/pytrends_related_concat.pkl')
+videos_trends_merged = pd.read_pickle(r'./data/videos_trends_merged.pkl')
 
 # Loading previously extracted Hotel occupancy rate and international arrivals data
 
-hotel_data = pd.read_pickle(r'Projects\Final project\data\hotel_data_edited.pkl')
 number_of_tourist_arrivals = pd.read_pickle(r'Projects\Final project\data\international-tourism-number-of-arrivals.pkl')
 
-# Loading dataframes to SQL
-
-engine = sql_connection.connecting()
-
-#channel_stats.to_sql('channel_stats', con=engine)
-#videos_info.drop(columns = ['all_countries', 'all_cities', 'all_regions', 'everywhere']).to_sql('info_about_all_videos', con=engine)
-#places_per_year_by_channel.to_sql('places_per_year_by_channel', con=engine) #to be debugged
-#places_mentions_views.to_sql('places_mentions_views', con=engine)
-#pytrends_top_places_2018.to_sql('pytrends_top_places_2018', con=engine)
-#pytrends_top_places_2019.to_sql('pytrends_top_places_2019', con=engine)
-#pytrends_top_places_2020.to_sql('pytrends_top_places_2020', con=engine)
-#pytrends_top_places_2021.to_sql('pytrends_top_places_2021', con=engine)
-#hotel_data.to_sql('hotel_occupancy_data', con=engine)
-#number_of_tourist_arrivals.to_sql('number_of_tourist_arrivals', con=engine)
-
-##################################################################
 
 # Google credentials to use the Youtube API
 
@@ -83,39 +65,42 @@ cleaning.deleting_emojis(videos_info)
 cleaning.cleaning_dfs(videos_info)
 cleaning.extracting_places(videos_info)
 
-# Some places extracting were introducing a bias into the data, so here I am deleting these places.
-# kara and nate: tennessee and nashville are in every description because it's their address
-# kristen e siya: their address is on many descriptions and it's grimsby, ontario(2017, 2018, 2019); they do have videos talking about ontario though
-# yes theory: ed, four and thomas are not places
-# drew binsky: in some of his recent (2021, 2022) descriptions he links some of his most popular videos and one of them is "► Why is Everything Free in Pakistan?"
+# Creating a new dataframe with the number a count for how many times each place was mentioned in each year
+places_per_year = cleaning.counting_ocurrences_places(videos_info)
 
+# Doing the same as before, but in this dataframe I can see how many times each place was mentioned by each channel
+places_per_year_by_channel = cleaning.counting_ocurrences_places_by_channel(videos_info)
+
+
+# Deleting the biased places
 cleaning.deleting_biased_places(videos_info, ['Tennessee', 'Nashville'], 1, 'Kara and Nate', 0)
 cleaning.deleting_biased_places(videos_info, ['Ontario', 'Grimsby'], 2, 'Kristen & Siya', 2017)
 cleaning.deleting_biased_places(videos_info, ['Four', 'Ed', 'Thomas'], 1, 'Yes Theory', 0)
 cleaning.deleting_biased_places(videos_info, ['Pakistan'], 2, 'Drew Binsky', 2021)
 
-places_per_year = cleaning.counting_ocurrences_places(videos_info)
-places_per_year_by_channel = cleaning.counting_ocurrences_places_by_channel(videos_info)
-
+# Adding up all the views gathered throughout all the videos that were mentioning each place in a certain year (from 2009 to 2022)
 places_per_year = cleaning.get_views_per_top_place(videos_info, places_per_year)
 
-for i in range(2010, 2022):
+# Getting rid of the list of tuples
+places_per_year_views = cleaning.organizing_places_views_df(places_per_year)
     
-    aux2 = cleaning.organizing_places_views_df(places_per_year, i)
-    places_per_year2 = pd.concat([places_per_year2, aux2]).reset_index(drop = True)
-    places_per_year2
 
 ###############################################################
 
-# Extracting google trends info
-pytrends_top_places_2018 = api.getting_google_trends(places_per_year_filtered, 2018)
-pytrends_top_places_2018
+# Extracting google trends info for places
+pytrends_thailand = api.getting_google_trends(['Thailand'])
+pytrends_india = api.getting_google_trends(['India'])
+pytrends_pakistan = api.getting_google_trends(['Pakistan'])
+pytrends_california = api.getting_google_trends(['California'])
+pytrends_tabriz = api.getting_google_trends(['Tabriz'])
+pytrends_mexico = api.getting_google_trends(['Mexico'])
+pytrends_arizona = api.getting_google_trends(['Arizona'])
 
-pytrends_top_places_2019 = api.getting_google_trends(places_per_year_filtered, 2019)
-pytrends_top_places_2019
-
-pytrends_top_places_2020 = api.getting_google_trends(places_per_year_filtered, 2020)
-pytrends_top_places_2020
-
-pytrends_top_places_2021 = api.getting_google_trends(places_per_year_filtered, 2021)
-pytrends_top_places_2021
+# Extracting google trends info for the searches "travel place" and "flight place"
+pytrends_thailand_related = api.getting_google_trends(['travel thailand', 'flight thailand'])
+pytrends_india_related = api.getting_google_trends(['travel india', 'flight india']) 
+pytrends_pakistan_related = api.getting_google_trends(['travel pakistan', 'flight pakistan']) 
+pytrends_california_related = api.getting_google_trends(['travel california', 'flight california'])
+pytrends_tabriz_related = api.getting_google_trends(['travel tabriz', 'flight tabriz'])
+pytrends_mexico_related = api.getting_google_trends(['travel mexico', 'flight mexico'])
+pytrends_arizona_related = api.getting_google_trends(['travel arizona', 'flight arizona'])
