@@ -90,7 +90,7 @@ Finally, the last piece of data was Google Trends interest over time results. Go
   
   5.  `all channels`: 'Us' was probably the word 'us' and not 'The U.S' and nationalities such as "German" and "Canadian" are not places either.  
  
-- To delete them, I built a function called deleting_biased_places to take care of these specific cases I had found by going through their channels and videos. Errors such as the ones listed on item number 5 were not deleted because they could easily spotted once I started to select the places that would the object of my project.
+- To delete them, I built a function called deleting_biased_places to take care of these specific cases I had found by going through their channels and videos. Errors such as the ones listed on item number 5 were not deleted because they could be easily spotted once I started to select the places that would be the object of my project.
   
 - **How to decide the criteria for selecting the places to be analysed?**  
 
