@@ -1,9 +1,12 @@
 import pandas as pd
 import numpy as np
+
 # viz
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 ###########################################
 
@@ -224,20 +227,35 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
     ##################################################
 
     def sns_correlation_heatmap(merged_df, place, years = 'all'):
+    '''
+    Creates a correlation matrix heatmap of weekly google trends results and
+    the sum of weekly youtube views of videos mentioning each place. Takes into consideration
+    only the weeks in which videos were posted.
     
+    :params:
+    merged_df (df) = the videos_trends_merged dataframe
+    place (str) = name of the place
+    years (list) = optional parameter, if not used defaults to 'all', otherwise gathers info from
+    views and trends for specific years
+    
+    :returns:
+    figure
+    
+    '''
     # checking the correlation in the 5 last years
     if years == 'all':
         
         corr = merged_df[['Total_Weekly_Views', f'{place}', f'Flight {place}', f'Travel {place}']].corr()
 
-        # Getting the Upper Triangle of the co-relation matrix
+        # Getting the Upper Triangle of the correlation matrix
         matrix = np.triu(corr)
 
         # using the upper triangle matrix as mask 
-        sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True))
+        fig = sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True))
         plt.xticks(rotation=-45)
         plt.suptitle(f'Correlation between Google Trends results and \nweekly YouTube views for videos mentioning {place}',
                      fontsize = 12, y = 1.1)
+        return fig
     
     # checking the correlation only in the years in which the place was the most viewed
     else:
@@ -245,19 +263,26 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
         corr = merged_df[merged_df['Year_Published'].isin(years)]
         corr = corr[['Total_Weekly_Views', f'{place}', f'Flight {place}', f'Travel {place}']].corr()
 
-        # Getting the Upper Triangle of the co-relation matrix
+        # Getting the Upper Triangle of the correlation matrix
         matrix = np.triu(corr)
 
         # using the upper triangle matrix as mask 
-        sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True))
+        fig = sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True))
         plt.xticks(rotation=-45)
         plt.suptitle(f'Correlation between Google Trends results and \nweekly YouTube views for videos mentioning {place} in {years}',
                      fontsize = 12, y = 1.1)
+        
+        return fig
     
     ##################################################
 
     def correlation_heatmap_tourism(tourism_df, views_df, place):
+    '''
+    Calculates the Pearson correlation parameter between the number of tourist arrivals
+    and number of youtube views. Returns a simple square figure with the parameter in the middle
+    along with a title.
     
+    '''
     select1 = views_df[views_df['places']==place]
     select2 = tourism_df[tourism_df['Entity']==place]
     
@@ -270,9 +295,11 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
     matrix = np.triu(corr)
     
     # using the upper triangle matrix as mask 
-    sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True), 
+    fig = sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True), 
                 yticklabels=False, xticklabels=False, cbar=False)
     
     plt.xticks(rotation=-45)
     plt.suptitle(f'Correlation between tourist arrivals \nper year and YouTube views for \nvideos mentioning {place}',
                  fontsize = 12, y = 0.8, x = 0.34, ha='center')
+    
+    return fig
