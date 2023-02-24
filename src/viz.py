@@ -61,7 +61,7 @@ def general_data(year, places):
 
     return fig
 
-    ##################################################
+##################################################
 
 
 def plotting_trends_videos(trends, trends_related, videos_info, place):
@@ -141,12 +141,12 @@ def plotting_trends_videos(trends, trends_related, videos_info, place):
     fig.update_xaxes(minor=dict(ticklen=6, tickcolor="black", showgrid=True),
                      rangeslider_visible=True,
                      rangeselector=dict(
-                     buttons=list([
-                        dict(count=1, label="1m", step="month", stepmode="backward"),
-                        dict(count=6, label="6m", step="month", stepmode="backward"),
-                        dict(count=1, label="1y", step="year", stepmode="backward"),
-                        dict(step="all")
-                    ])
+                                        buttons=list([
+                                            dict(count=1, label="1m", step="month", stepmode="backward"),
+                                            dict(count=6, label="6m", step="month", stepmode="backward"),
+                                            dict(count=1, label="1y", step="year", stepmode="backward"),
+                                            dict(step="all")]
+                    )
     
     ),
         rangeslider_thickness = 0.15,
@@ -156,11 +156,11 @@ def plotting_trends_videos(trends, trends_related, videos_info, place):
     
     return fig
     
-    ##################################################
+##################################################
 
 # Number of views per place over time X Number of tourist arrivals over time
 
-def plotting_tourism_data (places_mentions_views, tourism_info, place):
+def plotting_tourism_data (places_mentions_views, number_of_tourist_arrivals, place):
 
     '''
     Function that plots the video info (total number of views) and number of tourist arrivals
@@ -181,8 +181,7 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
                                              & (number_of_tourist_arrivals['Year']>=2018)]
     
         
-    fig = make_subplots(#rows=1, cols=2, 
-                    specs=[[{"secondary_y": True}]])    
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
     
     trace1 = go.Scatter(
                     mode = 'lines',
@@ -190,19 +189,19 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
                     y = views['total_number_of_views'],
                     name= f'Total number of YouTube views for {place}',
                     yaxis='y2',
-                    line = dict(width = 2),
-                    marker=dict(
-                                color='black'
-                                line = dict(width = 2, color='black')
-                                )
-    )
+                    line = dict(width = 2)
+                    #marker = dict(
+                                #color="black",
+                                #line = dict(width = 2, color = "black")
+                                #)
+                        )
 
     trace2 = go.Bar(
                     x = arrivals['Year'],
                     y = arrivals['International tourism, number of arrivals'],
                     name='Number of tourists arriving',
                     marker = dict(color = '#cf5c49')
-    )
+                    )           
 
     
     fig.add_trace(trace1, secondary_y=True)
@@ -226,25 +225,26 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
 
     ##################################################
 
-    def sns_correlation_heatmap(merged_df, place, years = 'all'):
+def sns_correlation_heatmap(merged_df, place, years = 'all'):
+
     '''
     Creates a correlation matrix heatmap of weekly google trends results and
     the sum of weekly youtube views of videos mentioning each place. Takes into consideration
     only the weeks in which videos were posted.
-    
+
     :params:
     merged_df (df) = the videos_trends_merged dataframe
     place (str) = name of the place
     years (list) = optional parameter, if not used defaults to 'all', otherwise gathers info from
     views and trends for specific years
-    
+
     :returns:
     figure
-    
+
     '''
     # checking the correlation in the 5 last years
-    if years == 'all':
-        
+    if (years == 'all'):
+
         corr = merged_df[['Total_Weekly_Views', f'{place}', f'Flight {place}', f'Travel {place}']].corr()
 
         # Getting the Upper Triangle of the correlation matrix
@@ -254,12 +254,12 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
         fig = sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True))
         plt.xticks(rotation=-45)
         plt.suptitle(f'Correlation between Google Trends results and \nweekly YouTube views for videos mentioning {place}',
-                     fontsize = 12, y = 1.1)
+                    fontsize = 12, y = 1.1)
         return fig
-    
+
     # checking the correlation only in the years in which the place was the most viewed
     else:
-        
+
         corr = merged_df[merged_df['Year_Published'].isin(years)]
         corr = corr[['Total_Weekly_Views', f'{place}', f'Flight {place}', f'Travel {place}']].corr()
 
@@ -270,13 +270,14 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
         fig = sns.heatmap(corr, annot=True, mask=matrix, cmap = sns.light_palette("#cf5c49", as_cmap=True))
         plt.xticks(rotation=-45)
         plt.suptitle(f'Correlation between Google Trends results and \nweekly YouTube views for videos mentioning {place} in {years}',
-                     fontsize = 12, y = 1.1)
-        
+                    fontsize = 12, y = 1.1)
+
         return fig
-    
+
     ##################################################
 
-    def correlation_heatmap_tourism(tourism_df, views_df, place):
+def correlation_heatmap_tourism(tourism_df, views_df, place):
+    
     '''
     Calculates the Pearson correlation parameter between the number of tourist arrivals
     and number of youtube views. Returns a simple square figure with the parameter in the middle
@@ -300,6 +301,6 @@ def plotting_tourism_data (places_mentions_views, tourism_info, place):
     
     plt.xticks(rotation=-45)
     plt.suptitle(f'Correlation between tourist arrivals \nper year and YouTube views for \nvideos mentioning {place}',
-                 fontsize = 12, y = 0.8, x = 0.34, ha='center')
+                fontsize = 12, y = 0.8, x = 0.34, ha='center')
     
     return fig
