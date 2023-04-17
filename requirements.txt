@@ -14,4 +14,4 @@ seaborn==0.12.2
 spacy==3.1.6
 streamlit==1.21.0
 streamlit_option_menu==0.3.2
-~treamlit==1.15.1
+streamlit==1.15.1
