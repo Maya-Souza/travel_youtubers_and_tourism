@@ -2,7 +2,7 @@ google_api_python_client==2.85.0
 google_auth_oauthlib==0.7.1
 isodate==0.6.1
 locationtagger==0.0.1
-matplotlib==3.6.1
+matplotlib==3.7.1
 nltk==3.7
 numpy==1.23.3
 pandas==1.5.0
