@@ -8,6 +8,7 @@ from src import api
 
 # viz libraries
 from src import viz
+import matplotlib.pyplot as plt
 
 # youtube api libraries
 from googleapiclient.discovery import build
@@ -34,7 +35,7 @@ import googleapiclient.errors
 
 ### Loading previously downloaded international arrivals data
 
-number_of_tourist_arrivals = pd.read_pickle(r'Projects\Final project\data\international-tourism-number-of-arrivals.pkl')
+number_of_tourist_arrivals = pd.read_pickle('Projects\Final project\data\international-tourism-number-of-arrivals.pkl')
 
 ##########################################################################################################################
 
@@ -120,11 +121,11 @@ pytrends_arizona_related = api.getting_google_trends(['travel arizona', 'flight 
 
 # Creating 2 complete dataframes instead of 16 separate ones
 
-pytrends_list = [pytrends_pakistan, pytrends_india, pytrends_thailand, pytrends_jamaica, 
-                 pytrends_california, pytrends_santamonica, pytrends_tabriz, pytrends_mexico, pytrends_arizona]
+pytrends_list = [pytrends_pakistan, pytrends_india, pytrends_thailand,
+                 pytrends_california, pytrends_tabriz, pytrends_mexico, pytrends_arizona]
 
 pytrends_related_list = [pytrends_thailand_related,pytrends_india_related, pytrends_pakistan_related,
-                         pytrends_jamaica_related, pytrends_california_related, pytrends_santamonica_related, 
+                        pytrends_california_related,
                          pytrends_tabriz_related, pytrends_mexico_related, pytrends_arizona_related]
                  
 pytrends_concat = pd.concat(pytrends_list, axis = 1)
@@ -253,10 +254,10 @@ top_5_places_views_mentions_2018.show()
 top_5_places_views_mentions_2019 = viz.general_data(2019,places_mentions_views)
 top_5_places_views_mentions_2019.show()
 
-top_5_places_views_mentions_2020 = general_data(2020, places_mentions_views)
+top_5_places_views_mentions_2020 = viz.general_data(2020, places_mentions_views)
 top_5_places_views_mentions_2020.show()
 
-top_5_places_views_mentions_2021 = general_data(2021, places_mentions_views)
+top_5_places_views_mentions_2021 = viz.general_data(2021, places_mentions_views)
 top_5_places_views_mentions_2021.show()
 
 top_5_places_views_mentions_2022 = viz.general_data(2022, places_mentions_views)
