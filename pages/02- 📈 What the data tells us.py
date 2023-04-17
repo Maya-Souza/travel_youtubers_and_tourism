@@ -10,7 +10,7 @@ import streamlit as st
 st.set_page_config(layout="wide")
 import streamlit.components.v1 as components
 from streamlit_option_menu import option_menu
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
+# from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 
 # plotting functions files
@@ -35,6 +35,7 @@ number_of_tourist_arrivals = pd.read_pickle('data/international-tourism-number-o
 
 
 st.title("A data lover's paradise: graphs! 📈")
+st.write("#")
 page = option_menu(
     menu_title=None, 
     options=["Places mentioned in the videos along the years", "Google trends for each place", "Videos posted by year x Tourist arrivals"],
@@ -121,6 +122,11 @@ if page == "Places mentioned in the videos along the years":
     I did for Thailand-Bangkok is because the USA is way bigger than Thailand and has a very large volume of tourism in these 
     two states independently
     - **2022: Thailand, India and Mexico.**  
+    """)
+    st.write("""
+    Many of the places repeat themselves throughout the years. So, in the next steps 
+    I'll analyse each of them in the period of five years, not only in the year they were the most viewed,
+    so we can have a better sense of possible correlations.
     """)
 
 elif page == "Google trends for each place":
@@ -224,7 +230,9 @@ if page == "Videos posted by year x Tourist arrivals":
     st.write(""" Lastly, the only data on arrivals found for **Pakistan** was for the years of 2018 and 2021.
      """)
 
-    st.markdown("The graphs below show the total number of views for each place along the years and the number of tourist arrivals.")
+    st.write("""The graph below shows the total number of views for each place along the years 
+    and the number of tourist arrivals. Next to it we can see numerically through the Pearson coefficient if
+    there seems to be a correlation of the two pieces of data or not.""")
 
     selected2 = option_menu(
             menu_title=None,  
@@ -241,10 +249,18 @@ if page == "Videos posted by year x Tourist arrivals":
             },
         )
     st.markdown("---------")
-    col1,col2 = st.columns([2.2,1])
+    col1,col2 = st.columns([2.4,1])
 
     if selected2 == "Comments":
         st.subheader("💡Comments, insights and conclusions 💡")
+        st.write("""
+                No strong or moderate correlation was found. 
+                Given that the data sample is small, even if there was a moderate or strong correlation
+                I wouldn't be able to say whether it was a coincidence or not. 
+                I would need much more data stretching throughout a longer period of time in order to accurately show whether there's a 
+                correlation between these too variables - 
+                at least for some places - or not.
+                """)
 
     elif selected2 == "Tabriz":
         with col1:
@@ -270,11 +286,20 @@ if page == "Videos posted by year x Tourist arrivals":
             st.subheader(selected2)
             st.plotly_chart(viz.plotting_tourism_data(places_mentions_views, number_of_tourist_arrivals, selected2), 
                             theme='streamlit',use_container_width=True)
-
+        with col2:
+            st.write("#")
+            st.write("#")
+            st.write("#")
+            st.write("#")
+            st.write("#")
+            st.write("#")
+            st.write("#")
+            st.pyplot(viz.correlation_heatmap_tourism(number_of_tourist_arrivals, places_mentions_views, selected2).figure, 
+                            use_container_width=True)
     
 
                  
 
 if page == "Comments":
   st.subheader("💡Comments, insights and conclusions 💡")
-  
+ 
