@@ -8,7 +8,7 @@ with col1:
     st.subheader("📊 Hey, there! I'm Mayara, a data analyst 📈")
     st.subheader(" Let me tell you why I'm not just another one ✨")
 with col2:
-    st.image("imgs\me.jpg")
+    st.image("imgs/me.jpg")
     st.write('#')
 st.write("""
 I'm a 28-year-old Brazilian living in Barcelona and ever since I was a little kid, I've always been an extremely curious person. 
@@ -78,7 +78,7 @@ I believe this degree - which is 100% remote and self-paced - will allow me to b
 
 col4, col5 = st.columns([2,1.5])
 with col4:
-    st.image("imgs\presentation-final.jpeg")
+    st.image("imgs/presentation-final.jpeg")
 
 st.markdown("""##### :red[Last but not least]
 Thank you so much for reading this far!
