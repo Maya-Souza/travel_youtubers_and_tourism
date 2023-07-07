@@ -107,7 +107,7 @@ if page == "Places mentioned in the videos along the years":
 # Another possibility would be to use streamlit.aggrid if I wanted the user to filter the data
 # or to create pivot tables 
     st.markdown("---------")
-    st.subheader("💡Comments, insights and conclusions 💡")
+    st.subheader("💡Comments💡")
     st.write("""
     On the graphs above 
     we can see clearly that the the number of mentions does not necessarily translate into number of views.
@@ -175,7 +175,7 @@ elif page == "Google trends for each place":
     '---'
     if selected == "Comments":
 
-        st.subheader("💡Comments, insights and conclusions 💡")
+        st.subheader("💡Comments💡")
         st.write("""
         It seems that the total number of videos mentioning a specific place is not at all correlated with the volume of searches about this place. 
         This was in a certain way expected since the volume of views (meaning: the number of people that watched these videos) 
@@ -252,7 +252,7 @@ if page == "Videos posted by year x Tourist arrivals":
     col1,col2 = st.columns([2.4,1])
 
     if selected2 == "Comments":
-        st.subheader("💡Comments, insights and conclusions 💡")
+        st.subheader("💡Comments💡")
         st.write("""
                 No strong or moderate correlation was found. 
                 Given that the data sample is small, even if there was a moderate or strong correlation
@@ -301,5 +301,5 @@ if page == "Videos posted by year x Tourist arrivals":
                  
 
 if page == "Comments":
-  st.subheader("💡Comments, insights and conclusions 💡")
+  st.subheader("💡Comments💡")
  
